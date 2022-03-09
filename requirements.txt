@@ -11,4 +11,5 @@ tqdm
 numba
 quadprog
 inputs
-
+ipykernel
+jupyter
