@@ -146,7 +146,8 @@ class RobotStateLogger:
   log_names = (
     'motor_position',
     'motor_velocity',
-    'motor_torque'
+    'motor_torque',
+    'time'
   )
 
   def __init__(self, savedir: str):
@@ -159,6 +160,7 @@ class RobotStateLogger:
     self.loggers['motor_position'].update(robot.GetTrueMotorAngles())
     self.loggers['motor_velocity'].update(robot.GetTrueMotorVelocities())
     self.loggers['motor_torque'].update(robot.GetTrueMotorTorques())
+    self.loggers['time'].update(robot.GetTimeSinceReset())
 
   def on_episode_end(self, **kwargs):
     for logger in self.loggers.values():
