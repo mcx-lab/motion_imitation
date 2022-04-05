@@ -317,6 +317,15 @@ class LocomotionGymEnv(gym.Env):
                                                        base_pos)
       self._pybullet_client.configureDebugVisualizer(
           self._pybullet_client.COV_ENABLE_SINGLE_STEP_RENDERING, 1)
+
+      # Turn off rendering for the base model     
+      base_alpha = 0.
+      base_col = [1, 1, 1, base_alpha]
+      base_model = self.robot.quadruped
+      self._pybullet_client.changeVisualShape(base_model, -1, rgbaColor=base_col)
+      for l in range (self._pybullet_client.getNumJoints(base_model)):
+        self._pybullet_client.changeVisualShape(base_model, l, rgbaColor=base_col)
+  
       alpha = 1.
       if self._show_reference_id>=0:
         alpha = self._pybullet_client.readUserDebugParameter(self._show_reference_id)
